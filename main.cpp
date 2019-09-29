@@ -1,10 +1,14 @@
-//
-//  main.cpp
-//  SumSublist
-//
-//  Created by Margaret Peterson on 9/26/19.
-//  Copyright © 2019 Margaret Peterson. All rights reserved.
-//
+/*
+ * main.cpp
+ * SumSublist
+ * Margaret Peterson
+ * CS2C
+ * Lab 01 Sum Sublist
+ * 9/27/2019
+ *
+ */
+
+/* ----------- PART A SOURCE ----------- */
 
 #include <iostream>
 #include <vector>
@@ -58,7 +62,6 @@ void Sublist::showSublist() const{
 
 }
 
-//prob did this wrong but errkay
 Sublist Sublist::addItem(int index) const{
 
    Sublist newSub = *this; //deep copy
@@ -73,12 +76,11 @@ Sublist Sublist::addItem(int index) const{
 
 int main()
 {
-   int TARGET = 180;
+   int TARGET = 207;
    vector<int> dataSet;
-   vector<Sublist> choices; //COL?
-   vector<Sublist>::iterator iter, iterBest, iterEnd;
-   int k, j, numSets, max, masterSum;
-   bool foundPerfect;
+   vector<Sublist> choices;
+   vector<Sublist>::iterator iter, iterBest;
+   int max;
 
    dataSet.push_back(20); dataSet.push_back(12); dataSet.push_back(22);
    dataSet.push_back(15); dataSet.push_back(25);
@@ -89,12 +91,12 @@ int main()
    choices.clear();
    cout << "Target time: " << TARGET << endl;
 
-   // code provided by student
    choices.push_back(Sublist(&dataSet)); //initialize with empty sublist
 
+   //create power set of dataSet, save in choices
    for(int i = 0; i < dataSet.size(); i++){
-       //how do i find elements of col?
-      int choicesSize = choices.size();
+
+      long choicesSize = choices.size();
 
       for(int j = 0; j < choicesSize; j++){
 
@@ -108,8 +110,10 @@ int main()
       }
    }
 
-   //find largest sum
+   //find largest sum out of choices
    max = choices[0].getSum();
+   iterBest = choices.begin();
+
    for(iter = choices.begin(); iter != choices.end(); iter++){
       if((*iter).getSum() > max){
          iterBest = iter;
@@ -117,8 +121,108 @@ int main()
       }
    }
 
-
    iterBest->showSublist();
 
    return 0;
 }
+
+/* ------------ SAMPLE RUNS ------------
+
+ Target time: 1
+ Sublist ----------------
+ Sum: 0
+
+ Target time: 67
+ Sublist ----------------
+ Sum: 67
+ array[0] = 20
+ array[2] = 22
+ array[4] = 25
+
+ Target time: 180
+ Sublist ----------------
+ Sum: 179
+ array[0] = 20
+ array[1] = 12
+ array[3] = 15
+ array[4] = 25
+ array[5] = 19
+ array[6] = 29
+ array[7] = 18
+ array[8] = 11
+ array[9] = 13
+ array[10] = 17
+
+ Target time: 200
+ Sublist ----------------
+ Sum: 190
+ array[0] = 20
+ array[1] = 12
+ array[2] = 22
+ array[3] = 15
+ array[4] = 25
+ array[5] = 19
+ array[6] = 29
+ array[7] = 18
+ array[9] = 13
+ array[10] = 17
+
+ Target time: 1000
+ Sublist ----------------
+ Sum: 201
+ array[0] = 20
+ array[1] = 12
+ array[2] = 22
+ array[3] = 15
+ array[4] = 25
+ array[5] = 19
+ array[6] = 29
+ array[7] = 18
+ array[8] = 11
+ array[9] = 13
+ array[10] = 17
+
+ Target time: 17
+ Sublist ----------------
+ Sum: 17
+ array[10] = 17
+
+ Target time: 150
+ Sublist ----------------
+ Sum: 150
+ array[0] = 20
+ array[1] = 12
+ array[2] = 22
+ array[4] = 25
+ array[6] = 29
+ array[7] = 18
+ array[8] = 11
+ array[9] = 13
+
+ Target time: 207
+ Sublist ----------------
+ Sum: 201
+ array[0] = 20
+ array[1] = 12
+ array[2] = 22
+ array[3] = 15
+ array[4] = 25
+ array[5] = 19
+ array[6] = 29
+ array[7] = 18
+ array[8] = 11
+ array[9] = 13
+ array[10] = 17
+
+ ---------- END SAMPLE RUNS ----------- */
+
+
+
+
+
+
+
+
+
+
+
